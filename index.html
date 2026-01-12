@@ -9,6 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+#tech-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
     * {
       margin: 0;
       padding: 0;
@@ -66,7 +75,7 @@ body::before {
     }
 
     .card {
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(0, 229, 255, 0.6);
   backdrop-filter: blur(6px);
 }
@@ -153,14 +162,7 @@ body::before {
   color: #00e5ff;
 }
  /* Tech Animated Background */
-#tech-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: #000;
+
 }
 body {
   opacity: 0;
@@ -175,32 +177,192 @@ body {
   }
 }
 
+/* Floating WhatsApp Button */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(37, 211, 102, 0.6);
+  z-index: 999;
+}
+/* Language Overlay */
+#lang-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+
+  display: none; /* 👈 HIDDEN BY DEFAULT */
+  justify-content: center;
+  padding-top: 30px;
+}
+
+}
+
+.lang-box {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px 40px;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid rgba(0, 229, 255, 0.5);
+}
+
+.lang-box h2 {
+  margin-bottom: 20px;
+  color: #00e5ff;
+}
+
+.lang-box button {
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 12px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #00c6ff;
+  color: #000;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.lang-box button:hover {
+  transform: scale(1.05);
+}
+#change-lang-btn {
+  margin-top: 10px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #00e5ff;
+  background: transparent;
+  color: #00e5ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+#change-lang-btn:hover {
+  background: #00e5ff;
+  color: #000;
+}
+#chat-toggle {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: #00e5ff;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#chatbot {
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  width: 280px;
+  background: #000;
+  border: 1px solid #00e5ff;
+  border-radius: 15px;
+  display: none;
+  flex-direction: column;
+  z-index: 999;
+}
+
+#chat-header {
+  padding: 10px;
+  background: #00e5ff;
+  color: #000;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 15px 15px 0 0;
+}
+
+#chat-body {
+  padding: 10px;
+  height: 220px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+#chat-input {
+  display: flex;
+  border-top: 1px solid #00e5ff;
+}
+
+#chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+
+#chat-input button {
+  background: #00e5ff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
 
  </style>
 </head>
 <body>
+<!-- Language Selection Overlay -->
+<div id="lang-overlay">
+  <div class="lang-box">
+    <h2>Select Language</h2>
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('hi')">हिंदी</button>
+    <button onclick="setLanguage('bn')">বাংলা</button>
+  </div>
+</div>
 <canvas id="tech-bg"></canvas>
 
   <header>
     <h1 id="type text">HS CREATIONS</h1>
-    <p>Photo • Video • Digital Services</p>
+    <p data key="tagline">Photo Editing • Video Editing • Digital Services</p>
   </header>
 
   <section>
-    <h2>Our Services</h2>
+ <h2 data-key="services">Our Services</h2>
     <div class="services">
-      <div class="card">Photo Editing</div>
-      <div class="card">Pan Card Services</div>
-      <div class="card">Voter Card Services</div>
-      <div class="card">Ration Card Services</div>
-      <div class="card">Video Editing</div>
-      <div class="card">Form Filling</div>
-      <div class="card">Photo Frame Making</div>
-      <div class="card">Resume / CV Making</div>
+   <div class="card" data-key="photo_edit">Photo Editing</div>
+<div class="card" data-key="pan">Pan Card Services</div>
+<div class="card" data-key="voter">Voter Card Services</div>
+<div class="card" data-key="ration">Ration Card Services</div>
+<div class="card" data-key="video_edit">Video Editing</div>
+<div class="card" data-key="form">Form Filling</div>
+<div class="card" data-key="frame">Photo Frame Making</div>
+<div class="card" data-key="resume">Resume / CV Making</div>
     </div>
   </section>
 <section>
-  <h2>Customer Reviews</h2>
+  <h2 data-key="why">Why Choose Us?</h2>
+  <div class="services">
+    <div class="card">✔ Fast & Reliable Service</div>
+    <div class="card">✔ Affordable Local Rates</div>
+    <div class="card">✔ Experienced Editing Work</div>
+    <div class="card">✔ PAN / Voter / Ration Assistance</div>
+    <div class="card">✔ WhatsApp Support Available</div>
+    <div class="card">✔ Customer Satisfaction First</div>
+  </div>
+</section>
+
+<section>
+  <h2 data-key="reviews">Customer Reviews</h2>
 
   <div class="reviews">
     <div class="review-card">
@@ -237,23 +399,44 @@ body {
 </section>
 
   <section>
-    <h2>Contact Us</h2>
+    <h2 data-key="contact">Contact Us</h2>
     <div class="buttons">
-      <a class="btn whatsapp" href="https://wa.me/+91 8282815626" target="_blank">WhatsApp</a>
-      <a class="btn instagram" href="https://www.instagram.com/h_s_creations_editors_?igsh=MXJxdG4ybmd1eHp0Zw==" target="_blank">Instagram</a>
-      <a class="btn call" href="tel:8282815626">Call: 8282815626</a>
+      <a class="btn whatsapp" href="https://wa.me/+91 8282815626" target="_blank" data-key="whatsapp">WhatsApp</a>
+      <a class="btn instagram" href="https://www.instagram.com/h_s_creations_editors_?igsh=MXJxdG4ybmd1eHp0Zw==" target="_blank" data-key="instagram">Instagram</a>
+      <a class="btn call" href="tel:8282815626" data-key="call">Call: 8282815626</a>
+<div style="text-align:center; margin-top:25px;">
+  <a
+    class="btn"
+    style="background:#ffd700; color:#000;"
+    href="https://www.google.com/maps?q=22.5969595,88.1440361"
+    target="_blank">
+    ⭐ Review Us on Google
+  </a>
+</div>
+
     </div>
   </section>
 
   <section>
-    <h2>Our Location</h2>
+    <h2 data-key="location">Our Location</h2>
     <iframe
       src="https://www.google.com/maps?q=22.5969595,88.1440361&output=embed"
       loading="lazy">
     </iframe>
   </section>
+<section style="text-align:center; font-size:0.9rem; opacity:0.85;">
+  <p data-key="disclaimer">
+    ⚠️ <strong>Disclaimer:</strong> HS Creations provides assistance services only.
+    We are not a government office or authority. All PAN, Voter & Ration services
+    are processed as per customer request.
+  </p>
+</section>
 
   <footer>
+<br>
+<button id="change-lang-btn" onclick="openLanguageSelector()">
+  🌐 Change Language
+</button>
     © 2026 HS Creations | All Rights Reserved
   </footer>
 <script>
@@ -261,9 +444,10 @@ const canvas = document.getElementById("tech-bg");
 const ctx = canvas.getContext("2d");
 
 function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = document.documentElement.scrollWidth;
+  canvas.height = document.documentElement.scrollHeight;
 }
+
 resize();
 window.addEventListener("resize", resize);
 
@@ -285,7 +469,7 @@ function drawHex(x, y, size) {
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = "rgba(0,229,255,0.35)";
+  ctx.strokeStyle = "rgba(0,229,255,0.25)"; /* lighter for visibility */
   ctx.lineWidth = 1;
 
   const cols = Math.ceil(canvas.width / (hexSize * 1.7));
@@ -299,12 +483,194 @@ function animate() {
     }
   }
 
-  offset += 0.3;
+  offset += 0.25;
   requestAnimationFrame(animate);
 }
 
 animate();
 </script>
+
+<a
+  href="https://wa.me/918282815626"
+  class="floating-whatsapp"
+  target="_blank">
+  💬 WhatsApp
+</a>
+<script>
+const translations = {
+  en: {
+    tagline: "Photo • Video • Digital Services",
+    services: "Our Services",
+    why: "Why Choose HS Creations",
+    reviews: "Customer Reviews",
+    feedback: "Give Your Feedback",
+    contact: "Contact Us",
+    location: "Our Location",
+
+    photo_edit: "Photo Editing",
+    pan: "PAN Card Services",
+    voter: "Voter Card Services",
+    ration: "Ration Card Services",
+    video_edit: "Video Editing",
+    form: "Form Filling",
+    frame: "Photo Frame Making",
+    resume: "Resume / CV Making",
+
+    whatsapp: "WhatsApp",
+    instagram: "Instagram",
+    call: "Call: 8282815626",
+
+    disclaimer:
+      "HS Creations provides assistance services only. We are not a government authority."
+  },
+
+  hi: {
+    tagline: "फोटो • वीडियो • डिजिटल सेवाएं",
+    services: "हमारी सेवाएं",
+    why: "HS Creations क्यों चुनें",
+    reviews: "ग्राहक समीक्षाएं",
+    feedback: "अपना फीडबैक दें",
+    contact: "संपर्क करें",
+    location: "हमारा स्थान",
+
+    photo_edit: "फोटो एडिटिंग",
+    pan: "पैन कार्ड सेवाएं",
+    voter: "वोटर कार्ड सेवाएं",
+    ration: "राशन कार्ड सेवाएं",
+    video_edit: "वीडियो एडिटिंग",
+    form: "फॉर्म भरने की सेवा",
+    frame: "फोटो फ्रेम बनाना",
+    resume: "रिज़्यूमे / सीवी बनाना",
+
+    whatsapp: "व्हाट्सऐप",
+    instagram: "इंस्टाग्राम",
+    call: "कॉल करें: 8282815626",
+
+    disclaimer:
+      "HS Creations केवल सहायता सेवाएं प्रदान करता है। हम कोई सरकारी कार्यालय नहीं हैं।"
+  },
+
+  bn: {
+    tagline: "ফটো • ভিডিও • ডিজিটাল পরিষেবা",
+    services: "আমাদের পরিষেবা",
+    why: "কেন HS Creations বেছে নেবেন",
+    reviews: "গ্রাহক মতামত",
+    feedback: "আপনার মতামত দিন",
+    contact: "যোগাযোগ করুন",
+    location: "আমাদের অবস্থান",
+
+    photo_edit: "ফটো এডিটিং",
+    pan: "প্যান কার্ড পরিষেবা",
+    voter: "ভোটার কার্ড পরিষেবা",
+    ration: "রেশন কার্ড পরিষেবা",
+    video_edit: "ভিডিও এডিটিং",
+    form: "ফর্ম পূরণ পরিষেবা",
+    frame: "ফটো ফ্রেম তৈরি",
+    resume: "রিজিউমে / সিভি তৈরি",
+
+    whatsapp: "হোয়াটসঅ্যাপ",
+    instagram: "ইনস্টাগ্রাম",
+    call: "কল করুন: 8282815626",
+
+    disclaimer:
+      "HS Creations শুধুমাত্র সহায়তা পরিষেবা প্রদান করে। আমরা কোনো সরকারি দপ্তর নই।"
+  }
+};
+
+function setLanguage(lang) {
+  localStorage.setItem("siteLang", lang);
+  document.getElementById("lang-overlay").style.display = "none";
+
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    if (translations[lang][key]) {
+      el.innerText = translations[lang][key];
+    }
+  });
+}
+
+// On load
+window.onload = () => {
+  const savedLang = localStorage.getItem("siteLang");
+
+  if (savedLang) {
+    setLanguage(savedLang);
+  } else {
+    document.getElementById("lang-overlay").style.display = "flex";
+  }
+};
+
+</script>
+<script>
+function openLanguageSelector() {
+  document.getElementById("lang-overlay").style.display = "flex";
+}
+</script>
+<div id="chatbot">
+  <div id="chat-header">🤖 HS Creations Bot</div>
+
+  <div id="chat-body"></div>
+
+  <div id="chat-input">
+    <input type="text" id="userInput" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<button id="chat-toggle" onclick="toggleChat()">💬</button>
+<script>
+function toggleChat() {
+  const bot = document.getElementById("chatbot");
+  bot.style.display = bot.style.display === "flex" ? "none" : "flex";
+}
+
+function addMessage(text, sender) {
+  const chatBody = document.getElementById("chat-body");
+  const msg = document.createElement("div");
+  msg.style.margin = "6px 0";
+  msg.innerHTML = sender === "user"
+    ? `<b>You:</b> ${text}`
+    : `<b>Bot:</b> ${text}`;
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function sendMessage() {
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  input.value = "";
+
+  setTimeout(() => {
+    botReply(text.toLowerCase());
+  }, 500);
+}
+
+function botReply(msg) {
+  let reply = "Please contact us on WhatsApp for quick help 😊";
+
+  if (msg.includes("service")) {
+    reply = "We provide Photo Editing, Video Editing, PAN, Voter, Ration Card & Form Filling services.";
+  }
+  else if (msg.includes("pan") || msg.includes("voter")) {
+    reply = "PAN, Voter & Ration services are done with proper documents. Processing time varies.";
+  }
+  else if (msg.includes("time") || msg.includes("open")) {
+    reply = "We are open daily from 9 AM to 9 PM.";
+  }
+  else if (msg.includes("location")) {
+    reply = "We are located at Jujersha, Panchla. Google Maps available on website.";
+  }
+  else if (msg.includes("contact")) {
+    reply = "You can call or WhatsApp us at 8282815626.";
+  }
+
+  addMessage(reply, "bot");
+}
+</script>
+
 
 </body>
 </html>
